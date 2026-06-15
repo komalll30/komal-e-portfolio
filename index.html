@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of Komal Gowda, an Artificial Intelligence and Machine Learning student at REVA University. Exploring data analysis, predictive modeling, and deep learning." />
+  <title>Komal Gowda | AI &amp; Machine Learning Student</title>
+  <style>
+    /* ── Reset & Base ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #0a0a0f;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── CSS Variables ──────────────────────────────────────────── */
+    :root {
+      --accent: #6c63ff;
+      --accent2: #a78bfa;
+      --glass: rgba(255,255,255,0.05);
+      --glass-border: rgba(255,255,255,0.1);
+      --card-bg: rgba(15,15,30,0.8);
+    }
+
+    /* ── Navbar ─────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 6%;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .nav-logo {
+      font-size: 1.4rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.9rem; color: #94a3b8;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      padding: .5rem 1.2rem;
+      border: 1px solid var(--accent);
+      border-radius: 6px; color: var(--accent);
+      font-size: 0.9rem; transition: background .2s, color .2s;
+    }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
+
+    /* ── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; gap: 4rem;
+      padding: 8rem 6% 5rem;
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: .3rem .9rem; margin-bottom: 1.2rem;
+      background: rgba(108,99,255,.15);
+      border: 1px solid rgba(108,99,255,.4);
+      border-radius: 20px; font-size: .8rem;
+      color: var(--accent2); letter-spacing: .05em;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 800; line-height: 1.15;
+      background: linear-gradient(135deg, #fff 40%, var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 1.2rem;
+    }
+    .hero p {
+      font-size: 1.05rem; color: #94a3b8; max-width: 480px;
+      margin-bottom: 2rem;
+    }
+    .hero p strong { color: #e2e8f0; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      padding: .75rem 1.8rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 8px; color: #fff; font-weight: 600;
+      transition: opacity .2s;
+    }
+    .btn-primary:hover { opacity: .85; }
+    .btn-secondary {
+      padding: .75rem 1.8rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 8px; color: #e2e8f0; font-weight: 600;
+      background: var(--glass);
+      transition: border-color .2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Code card */
+    .code-card {
+      background: #0d1117;
+      border: 1px solid var(--glass-border);
+      border-radius: 12px; overflow: hidden;
+      font-size: .82rem;
+    }
+    .code-card-header {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .7rem 1rem;
+      background: rgba(255,255,255,.04);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .dot { width:10px; height:10px; border-radius:50%; }
+    .dot-r { background:#ff5f57; }
+    .dot-y { background:#febc2e; }
+    .dot-g { background:#28c840; }
+    .code-filename { margin-left:.5rem; color:#64748b; font-family: monospace; }
+    .code-card pre {
+      padding: 1.2rem 1.4rem;
+      color: #e2e8f0; font-family: 'Courier New', monospace;
+      white-space: pre-wrap; word-break: break-word;
+      line-height: 1.7;
+    }
+    .kw { color: #ff79c6; }
+    .fn { color: #50fa7b; }
+    .str { color: #f1fa8c; }
+    .cm { color: #6272a4; font-style: italic; }
+    .nm { color: #bd93f9; }
+
+    /* ── Section base ───────────────────────────────────────────── */
+    section { padding: 6rem 6%; }
+    .section-label {
+      display: inline-block;
+      padding: .25rem .8rem; margin-bottom: .8rem;
+      background: rgba(108,99,255,.12);
+      border: 1px solid rgba(108,99,255,.3);
+      border-radius: 20px; font-size: .75rem;
+      color: var(--accent2); text-transform: uppercase; letter-spacing: .08em;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700; color: #fff;
+      margin-bottom: .5rem;
+    }
+    .section-sub { color: #64748b; font-size: .95rem; }
+    .section-head { margin-bottom: 3.5rem; }
+    hr.divider { border: none; border-top: 1px solid var(--glass-border); margin: 0 6%; }
+
+    /* ── About ──────────────────────────────────────────────────── */
+    #about { background: rgba(255,255,255,.015); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
+    .about-text h3 { font-size: 1.3rem; font-weight: 600; color: #fff; margin-bottom: 1rem; }
+    .about-text p { color: #94a3b8; margin-bottom: 1rem; }
+    .about-text p strong { color: #e2e8f0; }
+    .about-meta { display: flex; flex-direction: column; gap: .5rem; margin-top: 1.5rem; }
+    .meta-item {
+      display: flex; align-items: center; gap: .6rem;
+      color: #94a3b8; font-size: .9rem;
+    }
+    .meta-icon { color: var(--accent); font-size: 1rem; }
+    .about-cards { display: grid; gap: 1.2rem; }
+    .about-card {
+      padding: 1.4rem;
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      transition: border-color .2s;
+    }
+    .about-card:hover { border-color: var(--accent); }
+    .about-card h4 { color: #fff; font-size: 1rem; margin-bottom: .4rem; }
+    .about-card p { color: #64748b; font-size: .88rem; }
+
+    /* ── Skills ─────────────────────────────────────────────────── */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .skills-group h3 { font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 1.5rem; }
+    .skill-bar-wrap { margin-bottom: 1.3rem; }
+    .skill-bar-label { display: flex; justify-content: space-between; margin-bottom: .4rem; font-size: .9rem; }
+    .skill-name { color: #e2e8f0; }
+    .skill-pct { color: var(--accent2); }
+    .skill-track {
+      height: 6px; background: rgba(255,255,255,.08); border-radius: 3px;
+    }
+    .skill-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    /* ── Education ──────────────────────────────────────────────── */
+    #education { background: rgba(255,255,255,.015); }
+    .edu-timeline { position: relative; padding-left: 2rem; }
+    .edu-timeline::before {
+      content: ''; position: absolute; left: 7px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+    .edu-item { position: relative; margin-bottom: 2rem; }
+    .edu-dot {
+      position: absolute; left: -2rem; top: .3rem;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid #0a0a0f;
+    }
+    .edu-year { font-size: .8rem; color: var(--accent2); margin-bottom: .3rem; }
+    .edu-card {
+      padding: 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+    }
+    .edu-card h3 { color: #fff; font-size: 1.15rem; margin-bottom: .2rem; }
+    .edu-card .degree { color: var(--accent2); font-size: .9rem; margin-bottom: .8rem; }
+    .edu-card p { color: #94a3b8; font-size: .9rem; }
+
+    /* ── Projects ───────────────────────────────────────────────── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px; padding: 1.8rem;
+      display: flex; flex-direction: column;
+      transition: border-color .2s, transform .2s;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .project-badge {
+      display: inline-block; padding: .2rem .7rem; margin-bottom: 1rem;
+      background: rgba(108,99,255,.15); border-radius: 20px;
+      font-size: .75rem; color: var(--accent2);
+    }
+    .project-card h3 { color: #fff; font-size: 1.1rem; margin-bottom: .6rem; }
+    .project-card p { color: #94a3b8; font-size: .9rem; flex: 1; margin-bottom: 1.2rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.2rem; }
+    .tag {
+      padding: .2rem .6rem;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--glass-border);
+      border-radius: 4px; font-size: .75rem; color: #94a3b8;
+    }
+    .project-links { display: flex; gap: 1rem; }
+    .project-links a {
+      font-size: .85rem; color: var(--accent);
+      border: 1px solid var(--accent); border-radius: 6px;
+      padding: .3rem .9rem; transition: background .2s, color .2s;
+    }
+    .project-links a:hover { background: var(--accent); color: #fff; }
+
+    /* ── Contact ────────────────────────────────────────────────── */
+    #contact { background: rgba(255,255,255,.015); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem; }
+    .contact-info h3 { color: #fff; font-size: 1.1rem; margin-bottom: .8rem; }
+    .contact-info p { color: #94a3b8; font-size: .9rem; margin-bottom: 1.5rem; }
+    .contact-item { display: flex; flex-direction: column; gap: .2rem; margin-bottom: 1rem; }
+    .contact-item-label { font-size: .75rem; color: #64748b; text-transform: uppercase; letter-spacing: .06em; }
+    .contact-item-val { color: var(--accent2); font-size: .9rem; }
+    .social-links { display: flex; gap: .8rem; margin-top: 1.5rem; }
+    .social-link {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      border-radius: 8px; font-size: 1.1rem;
+      transition: border-color .2s, color .2s;
+    }
+    .social-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Form */
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; }
+    .form-group label { font-size: .82rem; color: #64748b; }
+    .form-group input, .form-group textarea, .form-group select {
+      padding: .75rem 1rem;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px; color: #e2e8f0;
+      font-size: .9rem; outline: none;
+      transition: border-color .2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-submit {
+      padding: .85rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none; border-radius: 8px;
+      color: #fff; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: opacity .2s;
+    }
+    .form-submit:hover { opacity: .85; }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 2rem 6%;
+      border-top: 1px solid var(--glass-border);
+      color: #475569; font-size: .85rem;
+    }
+
+    /* ── Responsive ─────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 7rem; }
+      .code-card { display: none; }
+      .about-grid, .skills-grid, .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ── -->
+  <nav>
+    <a class="nav-logo" href="#">KG</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Let's Connect</a>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <span class="hero-badge">AI &amp; Machine Learning Student</span>
+      <h1>Designing the Future with Intelligence</h1>
+      <p>
+        Hi, I'm <strong>Komal Gowda</strong>. I am a passionate student at REVA University
+        specializing in Artificial Intelligence and Machine Learning. I combine data analytics,
+        technical expertise, and effective communication to build smart, data-driven solutions.
+      </p>
+      <div class="hero-btns">
+        <a class="btn-primary" href="#projects">View Projects</a>
+        <a class="btn-secondary" href="#contact">Get In Touch</a>
+      </div>
+    </div>
+
+    <div class="code-card">
+      <div class="code-card-header">
+        <span class="dot dot-r"></span>
+        <span class="dot dot-y"></span>
+        <span class="dot dot-g"></span>
+        <span class="code-filename">neural_network.py</span>
+      </div>
+      <pre><span class="kw">import</span> tensorflow <span class="kw">as</span> tf
+<span class="kw">from</span> tensorflow <span class="kw">import</span> keras
+
+model = keras.<span class="fn">Sequential</span>([
+    keras.layers.<span class="fn">Dense</span>(<span class="nm">128</span>, activation=<span class="str">'relu'</span>),
+    keras.layers.<span class="fn">Dropout</span>(<span class="nm">0.2</span>),
+    keras.layers.<span class="fn">Dense</span>(<span class="nm">10</span>, activation=<span class="str">'softmax'</span>)
+])
+
+<span class="cm"># Training intelligent solutions...</span>
+model.<span class="fn">compile</span>(optimizer=<span class="str">'adam'</span>,
+              loss=<span class="str">'sparse_categorical_crossentropy'</span>,
+              metrics=[<span class="str">'accuracy'</span>])
+<span class="fn">print</span>(<span class="str">"Model initialized successfully!"</span>)</pre>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── About ── -->
+  <section id="about">
+    <div class="section-head">
+      <span class="section-label">About Me</span>
+      <h2 class="section-title">Bridging Theory &amp; Practice</h2>
+      <p class="section-sub">Bridging theoretical concepts and practical applications</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h3>Who I Am</h3>
+        <p>
+          I am currently pursuing my degree in Artificial Intelligence and Machine Learning at
+          <strong>REVA University</strong> in Bengaluru, India. Being in one of India's top tech
+          hubs drives me to stay updated with modern tech and build models that solve real problems.
+        </p>
+        <p>
+          My academic journey focuses heavily on mathematical foundations, data manipulation,
+          predictive modeling, and deep learning algorithms. Beyond technical systems, I believe that
+          <strong>clear communication</strong> and <strong>collaborative teamwork</strong> are just
+          as essential for turning raw data into meaningful business insights.
+        </p>
+        <div class="about-meta">
+          <div class="meta-item"><span class="meta-icon">📍</span> Bengaluru, Karnataka, India</div>
+          <div class="meta-item"><span class="meta-icon">🎓</span> REVA University</div>
+        </div>
+      </div>
+      <div class="about-cards">
+        <div class="about-card">
+          <h4>Data Analytics</h4>
+          <p>Analyzing datasets to uncover hidden trends, clean anomalies, and create predictive models that drive smart decision-making.</p>
+        </div>
+        <div class="about-card">
+          <h4>AI &amp; Deep Learning</h4>
+          <p>Exploring neural networks, natural language processing, and computer vision architectures to build intelligent systems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── Skills ── -->
+  <section id="skills">
+    <div class="section-head">
+      <span class="section-label">Skills</span>
+      <h2 class="section-title">Technical &amp; Soft Skills</h2>
+      <p class="section-sub">My toolbox for solving complex challenges</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skills-group">
+        <h3>Machine Learning &amp; Coding</h3>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span class="skill-name">Data Analysis &amp; Visualization</span><span class="skill-pct">85%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span class="skill-name">Python Programming</span><span class="skill-pct">80%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span class="skill-name">Predictive Modeling</span><span class="skill-pct">75%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:75%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span class="skill-name">SQL &amp; Databases</span><span class="skill-pct">70%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:70%"></div></div>
+        </div>
+      </div>
+      <div class="skills-group">
+        <h3>Professional Qualities</h3>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span class="skill-name">Communication</span><span class="skill-pct">90%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span class="skill-name">Analytical Thinking</span><span class="skill-pct">85%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span class="skill-name">Problem Solving</span><span class="skill-pct">85%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span class="skill-name">Collaborative Teamwork</span><span class="skill-pct">80%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:80%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── Education ── -->
+  <section id="education">
+    <div class="section-head">
+      <span class="section-label">Education</span>
+      <h2 class="section-title">Academic Journey</h2>
+      <p class="section-sub">Academic timeline and training landmarks</p>
+    </div>
+    <div class="edu-timeline">
+      <div class="edu-item">
+        <div class="edu-dot"></div>
+        <p class="edu-year">2025 - Present</p>
+        <div class="edu-card">
+          <h3>REVA University</h3>
+          <p class="degree">Bachelor of Technology (B.Tech) – Artificial Intelligence &amp; Machine Learning</p>
+          <p>
+            Actively learning core engineering principles combined with advanced AI/ML topics,
+            including Data Structures &amp; Algorithms, Computational Mathematics, Machine Learning
+            Foundations, and Deep Neural Networks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── Projects ── -->
+  <section id="projects">
+    <div class="section-head">
+      <span class="section-label">Projects</span>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-sub">Hands-on applications of data analytics and machine learning</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <span class="project-badge">Computer Vision</span>
+        <h3>NeuroScope: MRI Tumor Detector</h3>
+        <p>
+          Designed a Convolutional Neural Network (CNN) model using TensorFlow to assist in
+          tumor detection in MRI scans. Reached 94% accuracy on the test set.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">TensorFlow</span>
+          <span class="tag">Keras</span><span class="tag">OpenCV</span>
+        </div>
+        <div class="project-links">
+          <a href="#">Code</a>
+          <a href="#">Live Demo</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <span class="project-badge">Deep Learning</span>
+        <h3>CropWise: Plant Disease Classifier</h3>
+        <p>
+          Built a classification model utilizing ResNet-50 transfer learning to detect over 15
+          crop diseases from leaves, helping farmers get real-time diagnostic insight.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">PyTorch</span>
+          <span class="tag">FastAPI</span><span class="tag">Docker</span>
+        </div>
+        <div class="project-links">
+          <a href="#">Code</a>
+          <a href="#">Live Demo</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <span class="project-badge">Data Analysis</span>
+        <h3>InsightFlow: Analytics Dashboard</h3>
+        <p>
+          Developed an interactive analytics dashboard featuring Natural Language Processing to
+          analyze customer sentiments from product reviews and highlight negative feedback trends.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">Pandas</span>
+          <span class="tag">Streamlit</span><span class="tag">NLTK</span>
+        </div>
+        <div class="project-links">
+          <a href="#">Code</a>
+          <a href="#">Live Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── Contact ── -->
+  <section id="contact">
+    <div class="section-head">
+      <span class="section-label">Contact</span>
+      <h2 class="section-title">Let's Connect</h2>
+      <p class="section-sub">Have a question or want to collaborate? Send a message!</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Contact Info</h3>
+        <p>Feel free to reach out to me for academic collaborations, projects, or professional opportunities.</p>
+        <div class="contact-item">
+          <span class="contact-item-label">Email</span>
+          <span class="contact-item-val">komal.gowda@student.reva.edu.in</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Location</span>
+          <span class="contact-item-val">Bengaluru, Karnataka, India</span>
+        </div>
+        <div class="social-links">
+          <a class="social-link" href="https://linkedin.com" target="_blank" title="LinkedIn">in</a>
+          <a class="social-link" href="https://github.com" target="_blank" title="GitHub">GH</a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Your Name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="your@email.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" placeholder="Subject" />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Your message..." required></textarea>
+        </div>
+        <button class="form-submit" type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <p>© 2026 Komal Gowda. All rights reserved. &nbsp;|&nbsp; Built with modern CSS &amp; glassmorphism.</p>
+  </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      alert('Thank you for your message! I will get back to you soon.');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
